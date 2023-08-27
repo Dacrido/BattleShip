@@ -80,7 +80,7 @@ def getGridSize():
     global rows, cols
     global num_of_planes
     global num_of_radar
-    print("Hello there commander! We need you help in this time of great need! The enemy have taken control of the sea, and we must wipe them out!")
+    print("Hello there commander! We need your help in this time of great need! The enemy have taken control of the sea, and we must wipe them out!")
     print("Before we begin commander, what is the size of the sea (5-9)? ", end = "")
     while True:
         value = input() # Collects user input about the grid size
