@@ -2,8 +2,6 @@ import random
 
                 ############## Description ##############
 """
-The problem this program solves is how to make a battleship game.
-
                     Grid creation and ship placement:
 This program takes user input on grid size, then creates and places in this grid
 a number of ships of random sizes, in random locations, random directions. 
