@@ -54,8 +54,8 @@ emptyTile = '.'
 shipTile = '.' # This variable is used for test purposes
 revealedShip = "0"
 revealedEmpty = "_"
-hitTile = "\033[32mx\033[0m" # The \033[32m and similar code are used to create color in the console 
-missTile = "\033[31m-\033[0m" # \033[0m resets all color back to default (white) in the console
+hitTile = "x" 
+missTile = "*" 
 
 # Firing
 num_of_shots = 1 
@@ -103,20 +103,6 @@ def getGridSize():
     if num_of_radar < 1:
         num_of_radar = 1
     
-def clear():
-    print("\033[H\033[2J")
-    print(" ")
-    """
-    
-    Function used to clear the screen, so that the board will not be outputted in the 
-    console over and over again. However, there is an error with the screen clear
-    that causes problems in the program. 
-    Error --> Seemingly randomly, user input will be registered as '' blanck, instead
-    of actually what the user inputted. While this does not ruin the program in any way
-    due to all the error conditions with try-except and if statements in the program
-    it still means that the user will sometimes have to input the same thing twice for it to work. 
-    """
-    #pass  # For now, function does nothing    
      
 def createShipList():
     """
@@ -265,13 +251,6 @@ def checkAvailability(shipSize, x_coor, y_coor, direction):
           # If the coordinate passes all conditions, change the coordinate based on direction
           x_coor, y_coor = directionEffect(x_coor, y_coor, direction)
           
-"""
-0 0 0 0 0
-0 1 0 0 1
-0 1 0 0 1
-0 1 0 0 1
-0 0 0 0 0 Impossible to place another ship of 3!!
-"""
 def placeShip(shipSize, x_coor, y_coor, direction, shipNum):
       """
       Similar to checkAvailability without checking the conditions, 
@@ -339,8 +318,7 @@ def fire():
             print(f"Shot number {num_of_shots}: ({len(shipPositions)} ships remaining)")
         else: # Literally only use of if-else is to change the word ships to ship. Very important :)
             print(f"Shot number {num_of_shots}: ({len(shipPositions)} ship remaining)")
-        getTorpedoCoordinates()# Get input from user             
-        clear() # Clear the grid 
+        getTorpedoCoordinates()# Get input from user 
         printGrid() # Re-print the grid
     # Once exiting the while loop, all ships are sunk, so print respective message
     print(f"You sunk all their battleships in {num_of_shots} shots! Good job!")
@@ -452,9 +430,8 @@ def hitOrMiss():
 def miss():
     """
     If miss, transform respective grid coordinate into a miss tile. 
-    Note: \033[31m and similar code are used to change color in console
     """
-    print("That's a \033[31mmiss\033[0m!")
+    print("That's a miss!")
     grid[fire_y][fire_x] = missTile
 
 def hit(shipNum):
@@ -470,7 +447,7 @@ def hit(shipNum):
     If the ship (key) contains a list (element) of 0 elements (no tuples 
     representing coordinates), that means that the ship sunk. 
     """
-    print("That's a \033[32mhit\033[0m!")
+    print("That's a hit!")
     grid[fire_y][fire_x] = hitTile
     
     
@@ -481,7 +458,7 @@ def hit(shipNum):
             break
     if len(shipPositions[shipNum]) == 0: # If list is length 0, ship is sunk
         del(shipPositions[shipNum]) # Ship removed from dictionary
-        print("\033[32mYou sunk a battleship\033[0m!")
+        print("You sunk a battleship!")
 
 def revealShipOrSea(x, y):
     """
@@ -643,7 +620,6 @@ def specialAbilityPlane():
     num_of_planes -= 1
 
 if (__name__ == "__main__"):
-    clear() 
     getGridSize()
     createShipList() 
     createGrid()   
